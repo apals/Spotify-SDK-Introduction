@@ -67,6 +67,14 @@ public class SearchActivity extends Activity implements PlayerNotificationCallba
     public void search(View v) {
         String query = ((EditText) findViewById(R.id.edittext_search)).getText().toString();
         new AsyncTask<String, Void, List<Track>>() {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                findViewById(R.id.listview_results).setVisibility(View.INVISIBLE);
+                findViewById(R.id.progressbar_search_results).setVisibility(View.VISIBLE);
+            }
+
             @Override
             protected List<Track> doInBackground(String... strings) {
                 List<Track> result = null;
@@ -84,6 +92,8 @@ public class SearchActivity extends Activity implements PlayerNotificationCallba
             protected void onPostExecute(List<Track> tracks) {
                 super.onPostExecute(tracks);
                 mListView.setAdapter(new SearchResultsAdapter(SearchActivity.this, android.R.layout.simple_list_item_1, (ArrayList<Track>) tracks));
+                findViewById(R.id.listview_results).setVisibility(View.VISIBLE);
+                findViewById(R.id.progressbar_search_results).setVisibility(View.INVISIBLE);
             }
         }.execute(query);
 

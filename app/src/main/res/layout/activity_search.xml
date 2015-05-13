@@ -6,25 +6,25 @@
 
     <Button
         android:id="@+id/button_search"
-        android:layout_alignParentRight="true"
-        android:text="@string/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="search"/>
+        android:layout_alignParentRight="true"
+        android:onClick="search"
+        android:text="@string/search" />
 
     <EditText
         android:id="@+id/edittext_search"
-        android:layout_toLeftOf="@+id/button_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/search"/>
+        android:layout_toLeftOf="@+id/button_search"
+        android:hint="@string/search" />
 
 
     <RadioGroup
         android:id="@+id/radiogroup_search_alternatives"
-        android:layout_below="@+id/edittext_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edittext_search"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
@@ -32,8 +32,8 @@
             android:id="@+id/radiobutton_songs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/songs"
-            android:checked="true"/>
+            android:checked="true"
+            android:text="@string/songs" />
 
         <RadioButton
             android:id="@+id/radiobutton_artists"
@@ -46,13 +46,28 @@
         android:id="@+id/textview_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/result"
-        android:layout_below="@+id/radiogroup_search_alternatives"/>
+        android:layout_below="@+id/radiogroup_search_alternatives"
+        android:text="@string/result" />
 
-    <ListView
-        android:id="@+id/listview_results"
-        android:layout_below="@+id/textview_result"
+    <RelativeLayout
+        android:id="@+id/relativelayout_search_results_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textview_result">
+
+        <ProgressBar
+            android:id="@+id/progressbar_search_results"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/drawable_progressbar"
+            android:visibility="invisible" />
+
+        <ListView
+            android:id="@+id/listview_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
