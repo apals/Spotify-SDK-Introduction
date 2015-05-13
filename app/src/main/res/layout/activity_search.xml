@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/button_search"
+        android:layout_alignParentRight="true"
+        android:text="@string/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="search"/>
+
+    <EditText
+        android:id="@+id/edittext_search"
+        android:layout_toLeftOf="@+id/button_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search"/>
+
+
+    <RadioGroup
+        android:id="@+id/radiogroup_search_alternatives"
+        android:layout_below="@+id/edittext_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radiobutton_songs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/songs"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radiobutton_artists"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/artists" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textview_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        android:layout_below="@+id/radiogroup_search_alternatives"/>
+
+    <ListView
+        android:id="@+id/listview_results"
+        android:layout_below="@+id/textview_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+</RelativeLayout>

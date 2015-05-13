@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="client_id">f74468c589a0405eb17aac76d7b10613</string>
+    <string name="spotify_callback">tutorial-login://callback</string>
+    <string name="artists">Artists</string>
+    <string name="songs">Songs</string>
+    <string name="search">Search</string>
+    <string name="result">Result</string>
+    <string name="spotify_base_url">https://api.spotify.com/v1/search</string>
 </resources>
