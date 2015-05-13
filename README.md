@@ -1,4 +1,4 @@
 # Spotify-SDK-Introduction
 
-Following the tutorial available at developer.spotify.com <br/>
-Will eventually probably add AccountManager-support
+Playing with the Spotify SDK to familirize myself with it.
+Current functionality: Login with user credentials, search for and play tracks.
