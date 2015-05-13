@@ -5,13 +5,20 @@ package com.example.apals.spotify_sdk_introduction.utils;
  */
 public class URLUtils {
 
-    public static final String BASE_URL = "https://api.spotify.com/v1/search";
+    public static final String BASE_URL = "https://api.spotify.com/v1/";
 
     public static String getSearchTrackURL(String query) {
         String URL = BASE_URL +
+                "search" +
                 "?q=" + query +
                 "&market=SE" +
                 "&type=track";
+        return URL;
+    }
+
+    public static String getCurrentUserURL() {
+        String URL = BASE_URL +
+                "me";
         return URL;
     }
 }

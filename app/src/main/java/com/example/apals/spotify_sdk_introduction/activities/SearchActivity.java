@@ -1,19 +1,25 @@
 package com.example.apals.spotify_sdk_introduction.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.apals.spotify_sdk_introduction.R;
 import com.example.apals.spotify_sdk_introduction.adapters.SearchResultsAdapter;
 import com.example.apals.spotify_sdk_introduction.models.APIModel;
 import com.example.apals.spotify_sdk_introduction.models.structs.LoggedInUser;
 import com.example.apals.spotify_sdk_introduction.models.structs.Track;
+import com.example.apals.spotify_sdk_introduction.models.structs.User;
 import com.spotify.sdk.android.player.Config;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
 import com.spotify.sdk.android.player.Player;
@@ -81,6 +87,65 @@ public class SearchActivity extends Activity implements PlayerNotificationCallba
             }
         }.execute(query);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_about:
+                showAboutDialog();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showAboutDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final View v = getLayoutInflater().inflate(R.layout.dialog_user, null);
+        new AsyncTask<Void, Void, User>() {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected User doInBackground(Void... voids) {
+                User u = null;
+                try {
+                    u = APIModel.getCurrentUser();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return u;
+            }
+
+            @Override
+            protected void onPostExecute(User user) {
+                super.onPostExecute(user);
+                v.findViewById(R.id.progressbar_user).setVisibility(View.INVISIBLE);
+                v.findViewById(R.id.linearlayout_user_info_container).setVisibility(View.VISIBLE);
+
+                TextView usernameTextView = (TextView) v.findViewById(R.id.textview_username);
+                usernameTextView.setText(user.getName());
+
+                TextView emailTextView = (TextView) v.findViewById(R.id.textview_email);
+                emailTextView.setText(user.getEmail());
+
+            }
+        }.execute();
+        builder.setTitle(getString(R.string.user));
+        builder.setView(v);
+        builder.create().show();
     }
 
     @Override

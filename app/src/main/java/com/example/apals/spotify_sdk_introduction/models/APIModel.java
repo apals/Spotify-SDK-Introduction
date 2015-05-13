@@ -1,5 +1,6 @@
 package com.example.apals.spotify_sdk_introduction.models;
 
+import com.example.apals.spotify_sdk_introduction.models.structs.User;
 import com.example.apals.spotify_sdk_introduction.utils.HttpUtils;
 import com.example.apals.spotify_sdk_introduction.utils.JSONUtils;
 import com.example.apals.spotify_sdk_introduction.models.structs.Track;
@@ -31,13 +32,20 @@ public class APIModel {
         return tracks;
     }
 
+    public static User getCurrentUser() throws IOException, JSONException {
+        HttpResponse response = HttpUtils.doGet(URLUtils.getCurrentUserURL());
+        String json = convertStreamToString(response.getEntity().getContent());
+        User user = JSONUtils.getUserFromJson(json);
+        return user;
+    }
+
     public static String convertStreamToString(InputStream inputStream) throws IOException {
         if (inputStream != null) {
             Writer writer = new StringWriter();
 
             char[] buffer = new char[1024];
             try {
-                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),1024);
+                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 1024);
                 int n;
                 while ((n = reader.read(buffer)) != -1) {
                     writer.write(buffer, 0, n);

@@ -1,6 +1,7 @@
 package com.example.apals.spotify_sdk_introduction.utils;
 
 import com.example.apals.spotify_sdk_introduction.models.structs.Track;
+import com.example.apals.spotify_sdk_introduction.models.structs.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,5 +34,12 @@ public class JSONUtils {
             artistNames = new ArrayList<>();
         }
         return tracks;
+    }
+
+    public static User getUserFromJson(String json) throws JSONException {
+        JSONObject jsonObject = new JSONObject(json);
+        String name = jsonObject.getString("id");
+        String email = jsonObject.getString("email");
+        return new User(name, email);
     }
 }
