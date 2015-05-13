@@ -24,6 +24,7 @@ import java.util.List;
 public class APIModel {
 
     public static List<Track> searchTracks(String query) throws IOException, JSONException {
+        query = query.replaceAll(" ", "%20");
         HttpResponse response = HttpUtils.doGet(URLUtils.getSearchTrackURL(query));
 
         String json = convertStreamToString(response.getEntity().getContent());
